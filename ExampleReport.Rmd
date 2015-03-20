@@ -3,8 +3,17 @@
  output: 
    html_document:
      keep_md: true
+     theme: "journal"
      toc: true
 ---
+```{r echo=FALSE}
+library(ggplot2)
+library(lubridate)
+library(grid)
+library(gridExtra)
+```
+
+
 # Summary Page
 
 ## Overview
@@ -48,8 +57,67 @@
 
 ## Hand Collected Data
 
-```{r handWeatherData, echo=FALSE}
+### Temperature Observations
 
+```{r handWeatherData, echo=FALSE,warning=FALSE}
+weatherObservations <- read.csv(
+  file = "Data/Weather/YYMMDD_FireName_FirelineWeatherObservations.csv", skip = 1)
+
+weatherObservations$DateTime <- paste(weatherObservations$Date_ddmmyyyy," ",weatherObservations$Time_hhmm)
+
+weatherObservations$DateTime <- dmy_hm(weatherObservations$DateTime)
+```
+
+```{r TemperatureObservations, echo=FALSE,warning=FALSE}
+TempPlot <- ggplot(data = weatherObservations, aes(x = DateTime, y = Temperature_F))+
+  theme_bw()+
+  ylab("Temperature (F)")+
+  xlab("Time")+
+  geom_line()+
+  geom_point()
+TempPlot
+```
+
+### Relative Humidity Observations
+
+```{r RHObservations, echo=FALSE, warning=FALSE}
+RHPlot <- ggplot(data = weatherObservations, aes(x = DateTime, y = RH))+
+  theme_bw()+
+  ylim(0,100)+
+  ylab("Relative Humidity (%)")+
+  xlab("Time")+
+  geom_line()+
+  geom_point()
+RHPlot
+```
+
+### Wind Observations
+
+```{r WindObservations, echo=FALSE,warning=FALSE}
+weatherObservations$Windspeed_mph[weatherObservations$Windspeed_mph=="L/V"] <- NA
+weatherObservations$Direction[weatherObservations$Direction=="L/V"] <- NA
+
+WindDirection <- c("N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW")
+WindAngle <- seq(0,337.5,22.5)
+WindLookUp <- data.frame(WindDirection,WindAngle)
+
+weatherObservations <- merge(weatherObservations,WindLookUp,by.x = "Direction", by.y = "WindDirection", all.x = TRUE)
+
+weatherObservations$Windspeed_mph <- as.numeric(as.character(weatherObservations$Windspeed_mph))
+
+weatherObservations$xend <- seconds(960) * sin(weatherObservations$WindAngle * (pi/180)) + weatherObservations$DateTime
+weatherObservations$yend <- 1 * cos(weatherObservations$WindAngle * (pi/180)) + weatherObservations$Windspeed_mph
+
+WindPlot <- ggplot(data = weatherObservations, aes(x = DateTime, y = Windspeed_mph))+
+  theme_bw()+
+  ylab("Wind Speed (mph)")+
+  xlab("Time")+
+  geom_segment(size = 1, aes(x = DateTime,
+                   xend = xend,
+                   y = Windspeed_mph,
+                   yend = yend),
+                   arrow = arrow(type = "closed",angle = "15",length = unit(.25,"cm")))
+WindPlot
 ```
 
 # Managed Fire Objectives

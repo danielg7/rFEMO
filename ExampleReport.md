@@ -1,4 +1,7 @@
 # Example FEMO Report
+
+
+
 # Summary Page
 
 ## Overview
@@ -37,7 +40,19 @@
 
 ## Hand Collected Data
 
+### Temperature Observations
 
+
+
+![plot of chunk TemperatureObservations](./ExampleReport_files/figure-html/TemperatureObservations.png) 
+
+### Relative Humidity Observations
+
+![plot of chunk RHObservations](./ExampleReport_files/figure-html/RHObservations.png) 
+
+### Wind Observations
+
+![plot of chunk WindObservations](./ExampleReport_files/figure-html/WindObservations.png) 
 
 # Managed Fire Objectives
 
