@@ -13,6 +13,8 @@ library(grid)
 library(gridExtra)
 library(plyr)
 
+setwd("vignettes/")
+
 source("../R/windConvert.R")
 source("../R/windPlot.R")
 

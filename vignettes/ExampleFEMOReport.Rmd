@@ -6,7 +6,7 @@
      theme: "journal"
      toc: true
 ---
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(ggplot2)
 library(lubridate)
 library(grid)

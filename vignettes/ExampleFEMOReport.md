@@ -1,14 +1,5 @@
 # Example FEMO Report
 
-```
-## Need help? Try the ggplot2 mailing list: http://groups.google.com/group/ggplot2.
-## 
-## Attaching package: 'lubridate'
-## 
-## The following object is masked from 'package:plyr':
-## 
-##     here
-```
 
 
 # Summary Page
