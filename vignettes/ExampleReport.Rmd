@@ -11,6 +11,12 @@ library(ggplot2)
 library(lubridate)
 library(grid)
 library(gridExtra)
+library(plyr)
+
+source("../R/windConvert.R")
+source("../R/windPlot.R")
+
+
 ```
 
 
@@ -61,8 +67,7 @@ library(gridExtra)
 
 ```{r handWeatherData, echo=FALSE,warning=FALSE}
 
-weatherObservations <- read.csv(
-  file = "vignettes/Data/Weather/YYMMDD_FireName_FirelineWeatherObservations.csv", skip = 1)
+weatherObservations <- read.csv(file = "Data/Weather/YYMMDD_FireName_FirelineWeatherObservations.csv", skip = 1)
 
 weatherObservations$DateTime <- paste(weatherObservations$Date_ddmmyyyy," ",weatherObservations$Time_hhmm)
 
