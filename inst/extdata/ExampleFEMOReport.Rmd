@@ -6,18 +6,8 @@
      theme: "journal"
      toc: true
 ---
-```{r echo=FALSE}
-library(ggplot2)
-library(lubridate)
-library(grid)
-library(gridExtra)
-library(plyr)
-
-setwd("vignettes/")
-
-source("../R/windConvert.R")
-source("../R/windPlot.R")
-
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(rFEMO)
 
 ```
 
@@ -127,3 +117,4 @@ Topkill 75% of woody species | Overall: 50-80% topkill of shrubs. Some areas exh
 Plots were placed at three places in the burn unit (see attached map).  Soil moisture was high throughout, with duff and thatch largely unconsumed.  No areas burned down to bare mineral soil unless heavies were present.  Seventy five to 85% of the unit was blackened.  Brome averaged 60% consumption.
 
 # Photographs
+

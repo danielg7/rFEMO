@@ -22,6 +22,6 @@ A ggplot of wind speed and direction over time.
 windCardinal <- c("SE","SSE","NE","L/V")
 Degrees <- windConvert(windCardinal, LightAndVariable = "L/V")
 Speed <- c(5, 2 , 3, "L/V")
-Time <- ymd_hm(c("2015/02/15 18:00","2015/02/15 18:30","2015/02/15 18:45","2015/02/15 19:00"))
+Time <- lubridate::ymd_hm(c("2015/02/15 18:00","2015/02/15 18:30","2015/02/15 18:45","2015/02/15 19:00"))
 }
 

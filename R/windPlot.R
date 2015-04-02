@@ -11,7 +11,9 @@
 #' windCardinal <- c("SE","SSE","NE","L/V")
 #' Degrees <- windConvert(windCardinal, LightAndVariable = "L/V")
 #' Speed <- c(5, 2 , 3, "L/V")
-#' Time <- ymd_hm(c("2015/02/15 18:00","2015/02/15 18:30","2015/02/15 18:45","2015/02/15 19:00"))
+#' Time <- lubridate::ymd_hm(c("2015/02/15 18:00","2015/02/15 18:30","2015/02/15 18:45","2015/02/15 19:00"))
+#' 
+#'  @export
 #' 
 
 windPlot <- function(DateTime,windDegrees,windSpeed){
@@ -24,7 +26,7 @@ windPlot <- function(DateTime,windDegrees,windSpeed){
   
   windDF <- data.frame(DateTime,windDegrees,windSpeed,xend,yend)
   
-  gg_WindPlot <- ggplot(data = windDF, aes(x = DateTime, y = windSpeed))+
+  gg_WindPlot <- ggplot2::ggplot(data = windDF, aes(x = DateTime, y = windSpeed))+
     theme_bw()+
     ylab("Wind Speed (mph)")+
     xlab("Time")+

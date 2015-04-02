@@ -9,6 +9,8 @@
 #' 
 #' windCardinal <- c("SE","SSE","NE","L/V")
 #' windDegrees <- windConvert(windCardinal)
+#' 
+#' @export
 
 windConvert <- function(cardinalWind = vector(), LightAndVariable = "L/V")
 {
@@ -17,7 +19,7 @@ windConvert <- function(cardinalWind = vector(), LightAndVariable = "L/V")
 
   cardinalWind[cardinalWind == LightAndVariable] <- NA 
   
-  cardinalWind <- mapvalues(x = cardinalWind,
+  cardinalWind <- plyr::mapvalues(x = cardinalWind,
                           from = c("N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"),
                           to = seq(0,337.5,22.5), warn_missing = FALSE)
 
