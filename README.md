@@ -4,7 +4,7 @@ This R package seeks to aid the production of fire effects monitoring reports th
 
 # Installation
 
-# Useage
+# Usage
 
 
 # Development
