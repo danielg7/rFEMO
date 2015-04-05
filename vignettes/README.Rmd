@@ -1,3 +1,9 @@
+---
+title: "README"
+author: "Daniel S. Godwin"
+output: html_document
+---
+
 # About
 
 This R package seeks to aid the production of fire effects monitoring reports through the use of standard tools and techniques. The aim is to create easy, streamlined, reproduceable reports and assist in data management.
@@ -6,8 +12,7 @@ This R package seeks to aid the production of fire effects monitoring reports th
 
 If you are entirely new to R, it's first necessary to install R and, for the sake of easing the learning curve, R Studio. Follow the instructions at [Getting Started With R](http://scs.math.yorku.ca/index.php/R:_Getting_started_with_R) to walk you through the basics. Once you have done that, make sure you have the `devtools` package installed (`install_packages("devtools")`) before moving forward.
 
-
-```r
+```{r, echo=TRUE, eval=FALSE}
 library("devtools")
 install_github("danielg7/rFEMO", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
 ```

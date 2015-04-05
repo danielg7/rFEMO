@@ -12,7 +12,8 @@
 #' @export
 
 # TODO:
-# Make it copy dummy data in
+# Make dummy data copy an option.
+# 
 
 createReportFolder <- function(Folder = getwd(), ProjectName)
   {
@@ -28,6 +29,7 @@ createReportFolder <- function(Folder = getwd(), ProjectName)
   dir.create(path = file.path(outputDir,"Data/GPS"))
   dir.create(path = file.path(outputDir,"Data/Photopoints"))
   dir.create(path = file.path(outputDir,"Data/Weather"))
+  dir.create(path = file.path(outputDir,"Data/FirelineObservations"))
   
   file.copy(from = system.file("extdata", "ExampleFEMOReport.Rmd", package = "rFEMO"),
             to = outputDir)
