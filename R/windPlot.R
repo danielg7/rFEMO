@@ -17,6 +17,12 @@
 #' 
 
 windPlot <- function(DateTime,windDegrees,windSpeed){
+  cleanTheme <- ggthemes::theme_tufte() +
+    ggplot2::theme(
+      text = ggplot2::element_text(family="sans",size=10),
+      axis.line = ggplot2::element_line(size = .3)
+    )
+  
   if(!is.POSIXct(DateTime)) stop("DateTime must be POSIXct. Try using lubridate to clean it up.")
   if(!is.numeric(windDegrees)) stop("windDegrees must be numeric. Try using windConvert to clean it up.")
   if(!is.numeric(windSpeed)) stop("windSpeed must be numeric. Replace any L/V with NA.")
@@ -27,7 +33,7 @@ windPlot <- function(DateTime,windDegrees,windSpeed){
   windDF <- data.frame(DateTime,windDegrees,windSpeed,xend,yend)
   
   gg_WindPlot <- ggplot2::ggplot(data = windDF, aes(x = DateTime, y = windSpeed))+
-    theme_bw()+
+    cleanTheme+
     ylab("Wind Speed (mph)")+
     xlab("Time")+
     geom_segment(size = 1, aes(x = DateTime,
