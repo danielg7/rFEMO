@@ -1,3 +1,9 @@
+---
+title: "README"
+author: "Daniel S. Godwin"
+output: html_document
+---
+
 # About
 
 This R package seeks to aid the production of fire effects monitoring reports through the use of standard tools and techniques. The aim is to create easy, streamlined, reproduceable reports and assist in data management.
