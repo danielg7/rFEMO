@@ -30,13 +30,18 @@ Basic workflow:
 * Easily generate wind vector charts interpreted from standard cardinal directions
 * Generate standard folder structures and create report framework in R.
 
-## Future developments:
+## Planned developments:
+
+### 0.1
 * A vignette extensively documenting workflow and the resulting report.
-* Make it easy to scrape from a standardized Google Sheet to allow quicker data entry
 * Create functions to automatically create RH and Temperature plots
 * Create options to automatically add prescription boundary parameters for graphs (i.e., RH < 25, WS > 20 mph, etc.)
+### 0.2
+* Make it easy to scrape from a standardized Google Sheet to allow quicker data entry
 * Make inclusion of photos easier.
 * Write custom .css to make an easier to read report.
+### 0.3
 * Add mapping component including a KMZ output tool
 * Make Ecological Metadata Language (EML) output tool to wrap FEMO/FOBS data in a convenient metadata.
+* Make crosswalk between output from FFI to rFEMO
 
