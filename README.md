@@ -18,7 +18,7 @@ Basic workflow:
 
 1. After installing, enable package (`library(rFEMO)`)
 2. Set your working directory to where you want to create your project folder for your report. If you are using R Studio, you can do this using the Session -> Set Working Directory -> Choose Directory menu item. 
-3. At the command prompt (`> `), type the command `createReportFolder(ProjectName = "YourProjectName")`, and replace `YourProjectName` with the name of the fire / project. If you want to save this folder elsewhere, you can use `createReportFolder(Folder = "C:/PathToYourIntendedDirectory/", ProjectName = "YourProjectName")`. This will create and populate a folder with a sample report document and a datasheet in `YourProjectName/Data/Weather`.
+3. At the command prompt (`> `), type the command `createReportFolder(ProjectName = "YourProjectName",ProjectDate = "YYYYMMDD")`, and replace `YourProjectName` with the name of the fire / project. If you want to save this folder elsewhere, you can use `createReportFolder(Folder = "C:/PathToYourIntendedDirectory/", ProjectName = "YourProjectName")`. This will create and populate a folder with a sample report document and a datasheet in `YourProjectName/Data/Weather`.
 4. Populate the datasheet in `YourProjectName/Data/Weather`
 5. Open the RMarkdown document in `YourProjectName/`. Make edits within this to reflect the activities and objectives of the project.
 6. Make sure that the file pointers in the RMarkdown document point to your data.
