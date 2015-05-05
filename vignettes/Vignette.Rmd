@@ -10,45 +10,136 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
+```{r echo=FALSE}
+library(rFEMO)
+```
+rFEMO Introduction
+========
 
-## 
+## About the package
 
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+`rFEMO` seeks to aid the production of fire effects monitoring reports through the use of standard tools and techniques. The aim is to create easy, streamlined, reproduceable reports and assist in data management.
 
-## Styles
+## Get rFEMO
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+```{r echo=TRUE, eval = FALSE}
+library("devtools")
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+install_github("danielg7/rFEMO", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+## Workflow
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+`rFEMO` can be used in a number of different ways, but we recommend the following workflow. In brief, we will create a folder for our data, populate it with our data, and edit the report to quickly generate a long-term, standardized data organization and reporting solution.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+### Get started
 
-## More Examples
+If you haven't yet installed it, make sure you install R and R Studio:
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+* [R](http://cran.r-project.org) is a stastical programming and graphing environment.
+* After R is installed, install [R Studio](http://www.rstudio.com/products/rstudio/download/), a development environment that makes using R much easier.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+R Studio opens with four main windows: a console (bottom left), a tabbed scripting / writing enivornment (upper left), a working environment (upper right) and a file / plot viewer (bottom right).
+
+The console, shown as `> ` is where you will directly enter commands. 
+
+### Create a blank workspace
+
+1. Check your working directory by typing `getwd()` in the command line.
+This working directory is will be where you will be creating your report folder. You can easily change it by going to `Files` tab on the right and navigating to the folder where you will want to create your data folder. 
+
+2. Create a blank workspace using the `createReportFolder` command:
+
++ Type in the command line (`> `): `createReportFolder(ProjectName = "YourProjectName", ProjectDate = "YYYYMMDD")`
+
++ This creates a folder structure within your working directory named "`YYYYMMDD_YourProjectName`"
+Within that, it will create folders to store your data. It will create a 'dummy' FEMO report called "`YYYYMMDD_YourProjectName_FemoReport.Rmd`" and a dummy weather observation sheet (`YYYYMMDD_YourProjectName_FirelineWeatherObservations.csv`)in `Data/Weather/`
+
+### Explore the workspace
+
+Make sure the `Files` tab is opened on your right. Open the folder corresponding to your project. You'll see:  
+```
+Data   
+-- FirelineObservations  
+--- YYYYMMDD_YourProjectName_FireBehaviorObservations.csv  # Not yet implemented.
+-- GPS  
+--- YYYYMMDD_YourProjectName_GPSPoints.csv   # Not yet implemented.
+-- Photos  
+--- ExamplePhoto.jpg
+-- WeatherObservations  
+--- YYYYMMDD_YourProjectName_FirelineWeatherObservations.csv
+-- Maps  
+--- ExampleMap.png  
 ```
 
-Also a quote using `>`:
+### Add your observations
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+### Edit the Fireline Weather Observations
+
+In your spreadsheet application of choice (usually Microsoft Excel), open `YYYYMMDD_YourProjectName_FirelineWeatherObservations.csv` and take a look. 
+
+Fill in your data here. It's important to include data such as FEMO names, fire names, and locations. Make sure to save it as a ".csv" again. CSV files are raw text that can be read by any program and allows your data to remain portable through the years. 
+
+### Tweak plots
+
+Once you have saved the fireline weather observations above, you can begin to tweak the plots you can see below:
+
+#### tempPlot
+```{r, echo = FALSE,warning=FALSE}
+library(lubridate)
+weatherObservations <- read.csv(file = system.file("extdata", "YYMMDD_FireName_FirelineWeatherObservations.csv", package = "rFEMO"), skip = 1)
+
+weatherObservations$DateTime <- paste(weatherObservations$Date_ddmmyyyy," ",weatherObservations$Time_hhmm)
+
+weatherObservations$DateTime <- dmy_hm(weatherObservations$DateTime)
+```
+
+```{r echo=TRUE,warning=FALSE,fig.cap="Plot of temperature change produced from tempPlot."}
+tempPlot(Temp = weatherObservations$Temperature_F,
+         DateTime = weatherObservations$DateTime, 
+         Temp_HighBoundary = 75) 
+```
+
+`tempPlot` takes the `Temperature_F` values and `DateTime` values from `weatherObservations` and produces a standardized plot. You can note high and low prescription boundaries using `Temp_HighBoundary` and `Temp_LowBoundary`. If left blank, no prescription lines are added.
+
+#### rhPlot
+
+```{r, echo=TRUE,warning=FALSE,fig.cap="Plot of RH change produced from rhPlot."}
+rhPlot(RH = weatherObservations$RH,
+       DateTime = weatherObservations$DateTime,
+       RH_LowBoundary = 25,
+       RH_HighBoundary = 75)
+```
+
+`rhPlot` takes the `RH` values and `DateTime` values from `weatherObservations` and produces a standardized plot. You can note high and low prescription boundaries using `RH_LowBoundary` and `RH_HighBoundary`. If left blank, no prescription lines are added.
+
+#### windPlot
+
+```{r WindObservations, echo=TRUE,warning=FALSE,fig.cap="Plot of wind vectors produced from windPlot."}
+weatherObservations$windDegree <- as.numeric(as.character(
+  windConvert(cardinalWind = weatherObservations$Direction,
+  LightAndVariable = "L/V")))
+
+weatherObservations$Windspeed_mph[weatherObservations$Windspeed_mph == "L/V"] <- NA
+weatherObservations$Windspeed_mph <- as.numeric(weatherObservations$Windspeed_mph)
+
+windPlot(DateTime = weatherObservations$DateTime,
+         windDegrees = weatherObservations$windDegree,
+         windSpeed = weatherObservations$Windspeed_mph,
+         Wind_LowBoundary = 3,
+         Wind_HighBoundary = 10)
+```
+
+`windPlot` takes the `windDegrees`, `windSpeed`, and `DateTime` values from `weatherObservations` and produces a standardized wind vector plot. You can note high and low prescription boundaries using `Wind_LowBoundary` and `Wind_HighBoundary`. If left blank, no prescription lines are added.
+
+windDegrees has to be in degree format. If you recorded wind direction in cardinal directions as is common, the `windConvert` function can convert it into cardinal directions. 
+
+
+### Knit report
+
+To create reports, type:
+```
+knit(input = "YourRMarkdownDocument.Rmd")
+```
+
+This will create a HTML and Microsoft Word document for your report.

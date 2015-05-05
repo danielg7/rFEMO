@@ -15,8 +15,7 @@ Imports:
     ggplot2,
     ggthemes,
     lubridate,
-    grid,
-    gridExtra
+    grid
 Suggests: 
     plotly,
     knitr

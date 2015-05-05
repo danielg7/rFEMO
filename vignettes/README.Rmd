@@ -1,7 +1,13 @@
 ---
 title: "README"
 author: "Daniel S. Godwin"
-output: html_document
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{How to use the rFEMO package}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 # About
@@ -28,20 +34,4 @@ Basic workflow:
 5. Open the RMarkdown document in `YourProjectName/`. Make edits within this to reflect the activities and objectives of the project.
 6. Make sure that the file pointers in the RMarkdown document point to your data.
 7. Compile the document by typing `knit(input = "YourRMarkdownDocument.Rmd")`
-
-# Development
-
-## Current features:
-* Easily generate wind vector charts interpreted from standard cardinal directions
-* Generate standard folder structures and create report framework in R.
-
-## Future developments:
-* A vignette extensively documenting workflow and the resulting report.
-* Make it easy to scrape from a standardized Google Sheet to allow quicker data entry
-* Create functions to automatically create RH and Temperature plots
-* Create options to automatically add prescription boundary parameters for graphs (i.e., RH < 25, WS > 20 mph, etc.)
-* Make inclusion of photos easier.
-* Write custom .css to make an easier to read report.
-* Add mapping component including a KMZ output tool
-* Make Ecological Metadata Language (EML) output tool to wrap FEMO/FOBS data in a convenient metadata.
 

@@ -8,7 +8,9 @@
 ---
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(rFEMO)
+library(lubridate)
 
+setwd("/Users/yourname/anotherfolder/yourProjectFolder")
 ```
 
 
@@ -59,6 +61,8 @@ library(rFEMO)
 
 ```{r handWeatherData, echo=FALSE,warning=FALSE}
 
+# Make sure to change the path after 'file =' below to the name of your weather observations.
+
 weatherObservations <- read.csv(file = "Data/Weather/YYMMDD_FireName_FirelineWeatherObservations.csv", skip = 1)
 
 weatherObservations$DateTime <- paste(weatherObservations$Date_ddmmyyyy," ",weatherObservations$Time_hhmm)
@@ -67,26 +71,18 @@ weatherObservations$DateTime <- dmy_hm(weatherObservations$DateTime)
 ```
 
 ```{r TemperatureObservations, echo=FALSE,warning=FALSE}
-TempPlot <- ggplot(data = weatherObservations, aes(x = DateTime, y = Temperature_F))+
-  theme_bw()+
-  ylab("Temperature (F)")+
-  xlab("Time")+
-  geom_line()+
-  geom_point()
-TempPlot
+tempPlot(Temp = weatherObservations$Temperature_F,
+         DateTime = weatherObservations$DateTime, 
+         Temp_HighBoundary = 75) 
 ```
 
 ### Relative Humidity Observations
 
 ```{r RHObservations, echo=FALSE, warning=FALSE}
-RHPlot <- ggplot(data = weatherObservations, aes(x = DateTime, y = RH))+
-  theme_bw()+
-  ylim(0,100)+
-  ylab("Relative Humidity (%)")+
-  xlab("Time")+
-  geom_line()+
-  geom_point()
-RHPlot
+rhPlot(RH = weatherObservations$RH,
+       DateTime = weatherObservations$DateTime,
+       RH_LowBoundary = 25,
+       RH_HighBoundary = 75)
 ```
 
 ### Wind Observations
@@ -101,7 +97,9 @@ weatherObservations$Windspeed_mph <- as.numeric(weatherObservations$Windspeed_mp
 
 windPlot(DateTime = weatherObservations$DateTime,
          windDegrees = weatherObservations$windDegree,
-         windSpeed = weatherObservations$Windspeed_mph)
+         windSpeed = weatherObservations$Windspeed_mph,
+         Wind_LowBoundary = 0,
+         Wind_HighBoundary = 10)
 ```
 
 # Managed Fire Objectives
@@ -118,3 +116,12 @@ Plots were placed at three places in the burn unit (see attached map).  Soil moi
 
 # Photographs
 
+![Figure 1 - FEMO makes observation at DP 1](ExamplePhoto.jpg)  
+
+** FEMO observations at DP 1. **
+
+# Maps
+
+![Map 1 - FEMO makes observation at DP 1](Data/Maps/ExampleMap.png)  
+
+**Map of project area.**

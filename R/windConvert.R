@@ -22,6 +22,7 @@ windConvert <- function(cardinalWind = vector(), LightAndVariable = "L/V")
   cardinalWind <- plyr::mapvalues(x = cardinalWind,
                           from = c("N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"),
                           to = seq(0,337.5,22.5), warn_missing = FALSE)
+  cardinalWind <- as.numeric(as.character(cardinalWind))
 
   return(cardinalWind)
 }
