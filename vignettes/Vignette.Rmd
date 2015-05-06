@@ -20,6 +20,8 @@ rFEMO Introduction
 
 `rFEMO` seeks to aid the production of fire effects monitoring reports through the use of standard tools and techniques. The aim is to create easy, streamlined, reproduceable reports and assist in data management.
 
+FEMO and FOBS reports vary considerably within and between units and rarely have consistent data storage solutions. Data portability, storage, and consistency aid later analyses and comparisons within and between plots. `rFEMO` is a step towards providing standardized process to make clear, easily comparable graphs and effectively manage data.
+
 ## Get rFEMO
 
 ```{r echo=TRUE, eval = FALSE}
@@ -31,6 +33,8 @@ install_github("danielg7/rFEMO", build=FALSE, dependencies=c("DEPENDS", "IMPORTS
 ## Workflow
 
 `rFEMO` can be used in a number of different ways, but we recommend the following workflow. In brief, we will create a folder for our data, populate it with our data, and edit the report to quickly generate a long-term, standardized data organization and reporting solution.
+
+Reports are written in Markdown, which is a quickly learned formatting markup for documents. Learn more [here](http://rmarkdown.rstudio.com).
 
 ### Get started
 
@@ -72,6 +76,8 @@ Data
 --- ExampleMap.png  
 ```
 
+This tool helps you establish naming conventions for storing your data, which is the easiest, clearest form of metadata for your FEMO / FOBS data.
+
 ### Add your observations
 
 ### Edit the Fireline Weather Observations
@@ -82,7 +88,9 @@ Fill in your data here. It's important to include data such as FEMO names, fire 
 
 ### Tweak plots
 
-Once you have saved the fireline weather observations above, you can begin to tweak the plots you can see below:
+Once you have saved the fireline weather observations above, you can begin to tweak the plots you can see below.
+
+You can also change the captions by filling in `fig.cap="Your figure caption"` within the R figure chunk (*e.g.*, `{r, echo=FALSE, warning=FALSE, fig.cap = "Your figure caption"}`)
 
 #### tempPlot
 ```{r, echo = FALSE,warning=FALSE}
@@ -134,12 +142,22 @@ windPlot(DateTime = weatherObservations$DateTime,
 
 windDegrees has to be in degree format. If you recorded wind direction in cardinal directions as is common, the `windConvert` function can convert it into cardinal directions. 
 
+### Tables
+
+Tables in Markdown are relatively easy. Note the example provided. `|` and `---` are used to create cells and text is put within them. You can easily edit this to make new descriptions of objectives.
+
+### Figures and Maps
+
+Including figures and maps is also easy.
+
+For a local file:
+`![alt text](Photos/img.png)`  
+
+For an image on the web:  
+`![alt text](http://example.com/logo.png)`
+
+**Warning**: Sometimes errors will appear when images included are too large. Try to keep them smaller than 1 mg.
 
 ### Knit report
 
-To create reports, type:
-```
-knit(input = "YourRMarkdownDocument.Rmd")
-```
-
-This will create a HTML and Microsoft Word document for your report.
+To create reports, click the drop down that says "Knit" at the top of your editing window. Choose either "Knit Word" or "Knit PDF". You may want to edit the Word Document later to change the Heading styles.

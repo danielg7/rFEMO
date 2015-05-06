@@ -1,48 +1,59 @@
 ---
- title: "Example FEMO Report"
- output: 
-   html_document:
-     keep_md: true
-     theme: "journal"
-     toc: true
+title: "Bear Creek Rx Report"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    keep_md: yes
+    theme: journal
+    toc: yes
+  word_document:
+    fig_caption: yes
+    fig_height: 5
+    fig_width: 5
 ---
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(rFEMO)
 library(lubridate)
 
-setwd("/Users/yourname/anotherfolder/yourProjectFolder")
+setwd("/Users/danielgodwin/Dropbox/Graduate School/Papers In Work/rFEMO/20150708_BearCreekRx")
 ```
-
+********
 
 # Summary Page
 
 ## Overview
 
-<!-- Make sure to include two spaces after each item to create a line break. -->
-
-**Project / Fire Name:**  Example Burn  
-**Unit / Sub-unit Name:**  Demo Unit 2  
-**Date of Fire:**  21 February 2015  
+**Project / Fire Name:**  Bear Creek Prescribed Fire  
+**Unit / Sub-unit Name:**  Unit 2  
+**Date of Fire:**  08 July 2015  
 **Observer(s):**  Jane Q. Femo  
   
     
-**Date of Report:**  01 March 2015  
+**Date of Report:**  10 July 2015  
 **Reporter(s):**  Jim P. Fobs  
 
 ## Unit Settings
 
-**Acres:**  
-**Elevation:**  
-**Slope:**  
-**Aspect:**  
+**Acres:**  38
+**Elevation:**  2100
+**Slope:**  Minimal
+**Aspect:**  South
   
   
-**UTM Zone:**  
-**Northing:**  
-**Easting:**  
+**UTM Zone:**  36 N
+**Northing:**  423789
+**Easting:**   423498
 
 ********
 # Weather Observations
+
+```{r kestrelData, echo=FALSE, include=FALSE, eval=FALSE}
+# To make the kestrel data be processed, change the above to include = TRUE.
+
+# kestrelObservations <- read.csv("Data/Weather/kestrel.csv",header = TRUE, skip = 1)
+
+```
 
 ## Hand Collected Data
 
@@ -52,14 +63,14 @@ setwd("/Users/yourname/anotherfolder/yourProjectFolder")
 
 # Make sure to change the path after 'file =' below to the name of your weather observations.
 
-weatherObservations <- read.csv(file = "Data/WeatherObservations/YYMMDD_FireName_FirelineWeatherObservations.csv", skip = 1)
+weatherObservations <- read.csv(file = "Data/WeatherObservations/20150708_BearCreekRx_FirelineWeatherObservations.csv", skip = 1)
 
 weatherObservations$DateTime <- paste(weatherObservations$Date_ddmmyyyy," ",weatherObservations$Time_hhmm)
 
 weatherObservations$DateTime <- dmy_hm(weatherObservations$DateTime)
 ```
 
-```{r TemperatureObservations, echo=FALSE,warning=FALSE}
+```{r TemperatureObservations, echo=FALSE,warning=FALSE, fig.cap="Temperature Observations"}
 tempPlot(Temp = weatherObservations$Temperature_F,
          DateTime = weatherObservations$DateTime, 
          Temp_HighBoundary = 75) 
@@ -67,7 +78,7 @@ tempPlot(Temp = weatherObservations$Temperature_F,
 
 ### Relative Humidity Observations
 
-```{r RHObservations, echo=FALSE, warning=FALSE}
+```{r RHObservations, echo=FALSE, warning=FALSE, fig.cap="RH Observations"}
 rhPlot(RH = weatherObservations$RH,
        DateTime = weatherObservations$DateTime,
        RH_LowBoundary = 25,
@@ -76,7 +87,7 @@ rhPlot(RH = weatherObservations$RH,
 
 ### Wind Observations
 
-```{r WindObservations, echo=FALSE,warning=FALSE}
+```{r WindObservations, echo=FALSE,warning=FALSE,fig.cap="Wind Observartions"}
 weatherObservations$windDegree <- as.numeric(as.character(
   windConvert(cardinalWind = weatherObservations$Direction,
   LightAndVariable = "L/V")))
@@ -86,9 +97,7 @@ weatherObservations$Windspeed_mph <- as.numeric(weatherObservations$Windspeed_mp
 
 windPlot(DateTime = weatherObservations$DateTime,
          windDegrees = weatherObservations$windDegree,
-         windSpeed = weatherObservations$Windspeed_mph,
-         Wind_LowBoundary = 0,
-         Wind_HighBoundary = 10)
+         windSpeed = weatherObservations$Windspeed_mph)
 ```
 
 # Managed Fire Objectives
@@ -103,14 +112,10 @@ Topkill 75% of woody species | Overall: 50-80% topkill of shrubs. Some areas exh
 
 Plots were placed at three places in the burn unit (see attached map).  Soil moisture was high throughout, with duff and thatch largely unconsumed.  No areas burned down to bare mineral soil unless heavies were present.  Seventy five to 85% of the unit was blackened.  Brome averaged 60% consumption.
 
-# Photographs
+# Figure
 
-![Figure 1 - FEMO makes observation at DP 1](Data/Photos/ExamplePhoto.jpg)  
-
-** FEMO observations at DP 1. **
+![Figure 1 - Example fire behavior](Data/Photos/ExamplePhoto.jpg)  
 
 # Maps
 
-![Map 1 - FEMO makes observation at DP 1](Data/Maps/ExampleMap.png)  
-
-**Map of project area.**
+![Map 1 - Map of Project Area](Data/Maps/ExampleMap.png)  
