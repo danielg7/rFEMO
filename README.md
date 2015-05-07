@@ -28,9 +28,9 @@ Basic workflow:
 
 For more indepth analysis, see the [vignette](https://www.dropbox.com/s/86c9u81ch2qu9r8/Vignette.html?dl=0) walkthrough.
 
-Check out an example report for the _Bear Creek Rx Fire_:
-[.Docx Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.docx?raw=true)
-[.PDF Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.pdf)
+Check out an example report for the _Bear Creek Rx Fire_:  
+[.Docx Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.docx?raw=true)  
+[.PDF Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.pdf)  
 
 # Development
 
