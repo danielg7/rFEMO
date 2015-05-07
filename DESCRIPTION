@@ -1,6 +1,6 @@
 Package: rFEMO
 Title: Fire Effects Monitoring Tools in R
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: "Daniel Godwin <danielg7@gmail.com> [aut, cre]"
 Description: This package seeks to aid the production of
     fire effects monitoring reports through the use of

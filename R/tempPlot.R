@@ -1,13 +1,13 @@
 #' Process temperature data and plot it over time.
 #' 
-#' \code{tempPlot} processes a vector of cardinal wind directions and returns degrees
+#' \code{tempPlot} processes a vector of temperatures and time and returns a plot.
 #' 
-#' @param Temp A vector of relative humidities
+#' @param Temp A vector of temepratures
 #' @param DateTime A vector of POSIXct objects
 #'                  corresponding to the time the data were collected in format yyyy:mm:dd hh:mm.
-#' @param Temp_LowBoundary A scalar value of the low boundary parameters for the RH. Defaults to NULL.
-#' @param Temp_HighBoundary A scalar value of the high boundary parameters for the RH. Defaults to NULL.
-#' @return A ggplot of RH over time.
+#' @param Temp_LowBoundary A scalar value of the low boundary parameters for temperature RH. Defaults to NULL.
+#' @param Temp_HighBoundary A scalar value of the high boundary parameters for the temperature. Defaults to NULL.
+#' @return A ggplot of temperature over time.
 #' @examples
 #' 
 #' myTemp <- c(72,68,52,48)

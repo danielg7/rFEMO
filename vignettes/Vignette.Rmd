@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
+    keep_md: true
 vignette: >
   %\VignetteIndexEntry{How to use the rFEMO package}
   %\VignetteEngine{knitr::rmarkdown}
