@@ -4,6 +4,13 @@
 
 This R package seeks to aid the production of fire effects monitoring reports through the use of standard tools and techniques. The aim is to create easy, streamlined, reproduceable reports and assist in data management.
 
+# Example Report
+
+Check out an example report for the _Bear Creek Rx Fire_:  
+[.Docx Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.docx?raw=true)  
+[.PDF Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.pdf)  
+
+
 # Installation
 
 If you are entirely new to R, it's first necessary to install R and, for the sake of easing the learning curve, R Studio. Follow the instructions at [Getting Started With R](http://scs.math.yorku.ca/index.php/R:_Getting_started_with_R) to walk you through the basics. Once you have done that, make sure you have the `devtools` package installed (`install_packages("devtools")`) before moving forward.
@@ -27,10 +34,6 @@ Basic workflow:
 7. Compile the document.
 
 For more indepth analysis, see the [vignette](https://www.dropbox.com/s/86c9u81ch2qu9r8/Vignette.html?dl=0) walkthrough.
-
-Check out an example report for the _Bear Creek Rx Fire_:  
-[.Docx Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.docx?raw=true)  
-[.PDF Version](https://github.com/danielg7/rFEMO/blob/master/20150708_BearCreekRx/20150708_BearCreekRx_Report.pdf)  
 
 # Development
 
